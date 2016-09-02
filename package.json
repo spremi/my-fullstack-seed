@@ -1,0 +1,8 @@
+{
+  "name": "my-fullstack-seed",
+  "version": "0.0.0",
+  "description": "Seed for simple fullstack web applications.",
+  "author": "Sanjeev Premi",
+  "license": "BSD-3-Clause",
+  "private": "true"
+}
