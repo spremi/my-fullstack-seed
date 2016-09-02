@@ -25,6 +25,11 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   //
+  // Load plugins automatically
+  //
+  require('jit-grunt')(grunt);
+
+  //
   // Configure the tasks
   //
   grunt.initConfig({
