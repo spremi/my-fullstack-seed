@@ -4,5 +4,8 @@
   "description": "Seed for simple fullstack web applications.",
   "author": "Sanjeev Premi",
   "license": "BSD-3-Clause",
-  "private": "true"
+  "private": "true",
+  "dependencies": {
+    "lodash": "4.15.0"
+  }
 }
