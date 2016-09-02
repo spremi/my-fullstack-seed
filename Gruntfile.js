@@ -20,6 +20,11 @@ module.exports = function (grunt) {
   var pkgInfo = grunt.file.readJSON('package.json');
 
   //
+  // Profile the tasks
+  //
+  require('time-grunt')(grunt);
+
+  //
   // Configure the tasks
   //
   grunt.initConfig({
