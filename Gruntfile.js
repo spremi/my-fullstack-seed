@@ -27,6 +27,21 @@ module.exports = function (grunt) {
     // Project information
     //
     pkg: pkgInfo,
+
+    //
+    // Project environment
+    //
+    env: {
+      dev: {
+        NODE_ENV: 'development'
+      },
+      test: {
+        NODE_ENV: 'test'
+      },
+      prod: {
+        NODE_ENV: 'production'
+      }
+    }
   });
 
 
