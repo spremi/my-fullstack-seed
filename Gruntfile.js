@@ -60,6 +60,46 @@ module.exports = function (grunt) {
       prod: {
         NODE_ENV: 'production'
       }
+    },
+
+    //
+    // Detect errors & potential problems
+    //
+    jshint: {
+      options: {
+        reporter: require('jshint-stylish')
+      },
+      client: {
+        options: {
+          jshintrc: 'client/.jshintrc'
+        },
+        src: [
+          '<%= proj.client %>/app/**/*.js',
+          '!<%= proj.client %>/app/**/*.spec.js',
+          '!<%= proj.client %>/app/**/*.mock.js'
+        ]
+      },
+      clientTest: {
+        src: [
+          '<%= proj.client %>/app/**/*.spec.js',
+          '<%= proj.client %>/app/**/*.mock.js'
+        ]
+      },
+      server: {
+        options: {
+          jshintrc: '<%= proj.server %>/.jshintrc'
+        },
+        src: [
+          '<%= proj.server %>/**/*.js',
+          '!<%= proj.server %>/**/*.spec.js'
+        ]
+      },
+      serverTest: {
+        options: {
+          jshintrc: '<%= proj.server %>/.jshintrc-spec'
+        },
+        src: ['<%= proj.server %>/**/*.spec.js']
+      }
     }
   });
 
@@ -82,6 +122,7 @@ module.exports = function (grunt) {
   // Default task
   //
   grunt.registerTask('default', [
-    'banner'
+    'banner',
+    'newer:jshint'
   ]);
 };
