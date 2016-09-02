@@ -1,0 +1,21 @@
+#
+# Directories to ignore
+#
+client/lib
+node_modules
+dist
+
+#
+# Files to ignore
+#
+*~
+*.swp
+*.patch
+*.diff
+*.orig
+*.rej
+
+#
+# Files that shouldn't be ignored
+#
+!.gitignore
