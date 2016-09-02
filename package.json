@@ -6,6 +6,7 @@
   "license": "BSD-3-Clause",
   "private": "true",
   "dependencies": {
-    "lodash": "4.15.0"
+    "lodash": "4.15.0",
+    "path": "0.12.7"
   }
 }
