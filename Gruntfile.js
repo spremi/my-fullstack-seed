@@ -27,7 +27,9 @@ module.exports = function (grunt) {
   //
   // Load plugins automatically
   //
-  require('jit-grunt')(grunt);
+  require('jit-grunt')(grunt, {
+    express: 'grunt-express-server'
+  });
 
   //
   // Configure the tasks
@@ -100,7 +102,32 @@ module.exports = function (grunt) {
         },
         src: ['<%= proj.server %>/**/*.spec.js']
       }
-    }
+    },
+
+    //
+    // Express server
+    //
+    express: {
+      options: {
+        port: require('./server/config/mode').port
+      },
+      dev: {
+        options: {
+          script: '<%= proj.server %>/main.js',
+          debug: true
+        }
+      },
+      prod: {
+        options: {
+          script: '<%= proj.dist %>/<%= proj.server %>/main.js'
+        }
+      }
+    },
+
+    //
+    // Watch
+    //
+    watch: {}
   });
 
 
@@ -116,6 +143,21 @@ module.exports = function (grunt) {
                 ':::'['yellow'];
 
       grunt.log.writeln(str);
+    });
+
+  //
+  // Task: serve
+  //
+  grunt.registerTask('serve', 'Serve the application',
+    function() {
+      grunt.log.writeln('\n :: Serve '['yellow']);
+
+      grunt.task.run([
+        'banner',
+        'newer:jshint',
+        'express:dev',
+        'watch'
+      ]);
     });
 
   //
