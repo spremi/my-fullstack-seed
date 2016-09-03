@@ -50,6 +50,11 @@ module.exports = function (grunt) {
     },
 
     //
+    // Run-time project configuration
+    //
+    projCfg: {},
+
+    //
     // Project environment
     //
     env: {
@@ -109,7 +114,7 @@ module.exports = function (grunt) {
     //
     express: {
       options: {
-        port: require('./server/config/mode').port
+        port: '<%= projCfg.port %>'
       },
       dev: {
         options: {
@@ -146,6 +151,20 @@ module.exports = function (grunt) {
     });
 
   //
+  // Task: Apply project configuration
+  //       (Configuration within sources shall be exported to 'dist'.
+  //        So, it can be safely used in all build modes.)
+  //
+  grunt.registerTask('projcfg', 'Get configuration based on chosen environment',
+    function (arg) {
+      var cfg = require('./server/config/mode');
+
+      grunt.config.merge({
+        projCfg: cfg
+      });
+    });
+
+  //
   // Task: serve
   //
   grunt.registerTask('serve', 'Serve the application',
@@ -156,6 +175,7 @@ module.exports = function (grunt) {
         'banner',
         'newer:jshint',
         'env:dev',
+        'projcfg',
         'express:dev',
         'watch'
       ]);
@@ -167,6 +187,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'banner',
     'newer:jshint',
-    'env:prod'
+    'env:prod',
+    'projcfg'
   ]);
 };
