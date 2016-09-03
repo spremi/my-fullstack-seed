@@ -39,6 +39,15 @@ module.exports = function (grunt) {
     pkg: pkgInfo,
 
     //
+    // Project structure
+    //
+    proj: {
+      client: 'client',
+      server: 'server',
+      dist: 'dist'
+    },
+
+    //
     // Project environment
     //
     env: {
