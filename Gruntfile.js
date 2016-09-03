@@ -132,7 +132,16 @@ module.exports = function (grunt) {
     //
     // Watch
     //
-    watch: {}
+    watch: {},
+
+    //
+    // Open
+    //
+    open: {
+      server: {
+        url: 'http://<%= projCfg.host %>:<%= projCfg.port %>'
+      }
+    }
   });
 
 
@@ -177,6 +186,7 @@ module.exports = function (grunt) {
         'env:dev',
         'projcfg',
         'express:dev',
+        'open',
         'watch'
       ]);
     });
