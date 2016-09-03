@@ -155,6 +155,7 @@ module.exports = function (grunt) {
       grunt.task.run([
         'banner',
         'newer:jshint',
+        'env:dev',
         'express:dev',
         'watch'
       ]);
@@ -165,6 +166,7 @@ module.exports = function (grunt) {
   //
   grunt.registerTask('default', [
     'banner',
-    'newer:jshint'
+    'newer:jshint',
+    'env:prod'
   ]);
 };
