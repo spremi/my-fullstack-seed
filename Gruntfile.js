@@ -288,7 +288,21 @@ module.exports = function (grunt) {
   // Task: serve
   //
   grunt.registerTask('serve', 'Serve the application',
-    function() {
+    function(arg) {
+      if (arg === 'debug') {
+        grunt.log.writeln('\n :: Serve/'['yellow'] + 'debug'['cyan']);
+
+        return grunt.task.run([
+          'banner',
+          'newer:jshint',
+          'env:dev',
+          'projcfg',
+          'injector',
+          'stylus',
+          'node-inspector'
+        ]);
+      }
+
       grunt.log.writeln('\n :: Serve '['yellow']);
 
       grunt.task.run([
