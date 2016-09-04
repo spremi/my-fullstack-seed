@@ -23,6 +23,7 @@
     "grunt-open": "0.2.3",
     "jit-grunt": "0.10.0",
     "jshint-stylish": "2.2.1",
+    "open": "0.0.5",
     "time-grunt": "1.4.0"
   }
 }
