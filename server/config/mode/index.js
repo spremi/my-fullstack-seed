@@ -39,7 +39,12 @@ var cfg = {
   //
   // Port to bind the application server
   //
-  port: 9001
+  port: 9001,
+
+  //
+  // Port to bind the debug server
+  //
+  dbg_port: 5858
 };
 
 /**
@@ -71,6 +76,10 @@ function getConfig(mode) {
 
   if (typeof process.env.PORT !== 'undefined') {
     specific.port = process.env.PORT;
+  }
+
+  if (typeof process.env.DEBUG_PORT !== 'undefined') {
+    specific.dbg_port = process.env.DEBUG_PORT;
   }
 
   return _.merge(cfg, specific);

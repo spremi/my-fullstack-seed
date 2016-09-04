@@ -18,5 +18,7 @@ module.exports = {
 
   host: 'localhost',
 
-  port: 9091
+  port: 9091,
+
+  dbg_port: 9098
 };
