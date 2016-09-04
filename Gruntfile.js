@@ -173,6 +173,23 @@ module.exports = function (grunt) {
             '!<%= proj.client %>/app/**/*.mock.js'
           ]
         }
+      },
+      stylus: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/client/', '');
+
+            return '@import \'' + filePath + '\';';
+          },
+          starttag: '// injector:stylus:begin',
+          endtag: '// injector:stylus:end'
+        },
+        files: {
+          '<%= proj.client %>/app/app.styl': [
+            '<%= proj.client %>/app/**/*.styl',
+            '!<%= proj.client %>/app/app.styl'
+          ]
+        }
       }
     }
   });
