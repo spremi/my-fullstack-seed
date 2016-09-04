@@ -141,6 +141,39 @@ module.exports = function (grunt) {
       server: {
         url: 'http://<%= projCfg.host %>:<%= projCfg.port %>'
       }
+    },
+
+    //
+    // Injector
+    //
+    injector: {
+      options: {
+        relative: true,
+        addRootSlash: false
+      },
+
+      //
+      // Scripts from the application
+      //
+      scripts: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/client/', '');
+
+            return '<script src="' + filePath + '"></script>';
+          },
+          starttag: '<!-- injector:js:begin -->',
+          endtag: '<!-- injector:js:end -->'
+        },
+        files: {
+          '<%= proj.client %>/index.html': [
+            '<%= proj.client %>/app/**/*.js',
+            '!<%= proj.client %>/app/app.js',
+            '!<%= proj.client %>/app/**/*.spec.js',
+            '!<%= proj.client %>/app/**/*.mock.js'
+          ]
+        }
+      }
     }
   });
 
@@ -185,6 +218,7 @@ module.exports = function (grunt) {
         'newer:jshint',
         'env:dev',
         'projcfg',
+        'injector',
         'express:dev',
         'open',
         'watch'
@@ -198,6 +232,7 @@ module.exports = function (grunt) {
     'banner',
     'newer:jshint',
     'env:prod',
-    'projcfg'
+    'projcfg',
+    'injector'
   ]);
 };
