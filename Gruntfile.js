@@ -190,6 +190,15 @@ module.exports = function (grunt) {
             '!<%= proj.client %>/app/app.styl'
           ]
         }
+      },
+      bower_deps: {
+        options: {
+          starttag: '<!-- injector:bower.{{ext}}:begin -->',
+          endtag: '<!-- injector:bower.{{ext}}:end -->'
+        },
+        files: {
+          '<%= proj.client %>/index.html': ['bower.json']
+        }
       }
     }
   });
