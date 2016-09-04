@@ -235,6 +235,23 @@ module.exports = function (grunt) {
           '<%= proj.client %>/app/app-compiled.css' : '<%= proj.client %>/app/app.styl'
         }
       }
+    },
+
+    //
+    // Debugging interface to Node.JS applications
+    //
+    'node-inspector': {
+      custom: {
+        options: {
+          'web-host': '<%= projCfg.ip %>',
+          'web-port': '<%= projCfg.port %>',
+          'debug-port': '<%= projCfg.dbg_port %>',
+          'save-live-edit': true,
+          'preload': false,
+          'hidden': ['node_modules'],
+          'stack-trace-limit': 4,
+        }
+      }
     }
   });
 
