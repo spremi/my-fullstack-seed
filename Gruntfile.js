@@ -200,6 +200,24 @@ module.exports = function (grunt) {
           '<%= proj.client %>/index.html': ['bower.json']
         }
       }
+    },
+
+    //
+    // Compile stylus to css
+    //
+    stylus: {
+      compile: {
+        options: {
+          paths: [
+            '<%= proj.client %>/lib',
+            '<%= proj.client %>/app',
+          ],
+          "include css": true
+        },
+        files : {
+          '<%= proj.client %>/app/app-compiled.css' : '<%= proj.client %>/app/app.styl'
+        }
+      }
     }
   });
 
@@ -245,6 +263,7 @@ module.exports = function (grunt) {
         'env:dev',
         'projcfg',
         'injector',
+        'stylus',
         'express:dev',
         'open',
         'watch'
@@ -259,6 +278,7 @@ module.exports = function (grunt) {
     'newer:jshint',
     'env:prod',
     'projcfg',
-    'injector'
+    'injector',
+    'stylus'
   ]);
 };
