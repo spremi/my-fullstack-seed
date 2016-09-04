@@ -252,6 +252,48 @@ module.exports = function (grunt) {
           'stack-trace-limit': 4,
         }
       }
+    },
+
+    //
+    // Node monitor - Automatically restart server on source modification
+    //
+    nodemon: {
+      debug: {
+        script: 'server/main.js',
+        options: {
+          nodeArgs: ['--debug-brk'],
+          env: {
+            PORT: '<% projCfg.port %>'
+          },
+          callback: function (nodemon) {
+            //
+            // Listen to log events
+            //
+            nodemon.on('log', function (event) {
+              console.log(event.colour);
+            });
+
+            //
+            // Open browser first time the server starts - after 2 seconds
+            //
+            nodemon.on('config:update', function () {
+              setTimeout(function () {
+                require('open')('http://<% projCfg.host %>:<% projCfg.port %>');
+              }, 2000);
+            });
+
+            //
+            // Refresh the browser when server restarts
+            // (Write magic words to the file '.restarted')
+            //
+            nodemon.on('restart', function () {
+              setTimeout(function() {
+                require('fs').writeFileSync('.restarted', 'restarted');
+              }, 1000);
+            });
+          }
+        }
+      }
     }
   });
 
