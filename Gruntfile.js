@@ -199,6 +199,23 @@ module.exports = function (grunt) {
         files: {
           '<%= proj.client %>/index.html': ['bower.json']
         }
+      },
+      css: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/client/', '');
+
+            return '<link rel="stylesheet" href="' + filePath + '"/>';
+          },
+          starttag: '<!-- injector:css:begin -->',
+          endtag: '<!-- injector:css:end -->'
+        },
+        files: {
+          '<%= proj.client %>/index.html': [
+            '<%= proj.client %>/app/**/*.css',
+            '!<%= proj.client %>/app//app/app-compiled.css'
+          ]
+        }
       }
     },
 
